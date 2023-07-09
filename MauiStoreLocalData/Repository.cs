@@ -54,5 +54,12 @@ namespace MauiStoreLocalData
             await connection.ExecuteAsync(sql);
         }
 
+        public async Task<int> ExecuteScalaAsync(string sql)
+        {
+            // Call Init()
+            await Init();
+
+            return await connection.ExecuteScalarAsync<int>(sql);
+        }
     }
 }

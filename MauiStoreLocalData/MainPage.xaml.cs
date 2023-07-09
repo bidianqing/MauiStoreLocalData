@@ -7,22 +7,20 @@ public partial class MainPage : ContentPage
 	public MainPage()
 	{
 		InitializeComponent();
-	}
+    }
 
 	private async void OnCounterClicked(object sender, EventArgs e)
 	{
-		count++;
+        var user = new User
+        {
+            Username = "tom"
+        };
+        await App.Repository.InsertAsync(user);
 
-		if (count == 1)
-			CounterBtn.Text = $"Clicked {count} time";
-		else
-			CounterBtn.Text = $"Clicked {count} times";
+        string sql = "select count(*) from user";
+		int count = await App.Repository.ExecuteScalaAsync(sql);
 
-		var user = new User
-		{
-			Username = "tom"
-		};
-		await App.Repository.InsertAsync(user);
+        CounterBtn.Text = $"Users count: {count}";
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 	}
