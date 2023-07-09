@@ -5,7 +5,7 @@ namespace MauiStoreLocalData
     public class Repository
     {
         private SQLiteAsyncConnection connection;
-        private string _databasePath;
+        private readonly string _databasePath;
 
         public Repository(string databasePath)
         {
